@@ -94,7 +94,7 @@
    
    \includegraphics[height=0.1\textheight]{ucad.jpg}\\[1cm]
    
-   \textbf{\large \bfseries Faculté des Sciences Economiques et Gestion (FASEG)\\
+   \textbf{\large \bfseries Faculté des Sciences Economiques et de Gestion (FASEG)\\
      Master en Modélisation et Méthodes Quantitatives en Économie et en Finance (MMQEF)
    }\\[1cm]
     
@@ -132,9 +132,9 @@
 \begin{onehalfspace}
 \pagenumbering{roman}
 
-%--------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------------------
 % DEDICACES
-%--------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------------------
 \chapter*{Dédicaces}
 \addcontentsline{toc}{chapter}{\numberline{}Dédicaces}
 \vspace*{\stretch{1}}
@@ -145,6 +145,25 @@
 	A mes enfants, Ihsan et Amira...
 \end{flushright}
 \vspace*{\stretch{2}}
+
+%-------------------------------------------------------------------------------------------------------------
+% Avant propos
+%--------------------------------------------------------------------------------
+\chapter*{Avant-propos}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Avant-propos}
+
+Ce mémoire a été réalisé dans le cadre du Master en Modélisation et Méthodes Quantitatives en Economie et en Finance, organisé par la Faculté des Sciences Economiques et de Gestion de l’Université Cheikh Anta DIOP, en partenariat avec l’Ecole Nationale de la Statistique et d’Analyse Economique (ENSAE) de Dakar. Il a été rédigé à l’Institut National de la Statistique (INS) du Niger, qui constitue la principale source des données utilisées. 
+
+Le présent rapport a été entièrement élaboré sur l’application Rstudio qui un environnement de développement libre et gratuit pour le langage R. Il respecte les principes de la recherche reproductible, afin de permettre à toute personne qui le désire, d'inspecter le code de programmation utilisé pour le traitement et l’analyse des données et de vérifier les résultats auxquels nous sommes parvenus. 
+
+Ainsi, le programme R, ayant servi à obtenir les différents résultats contenus de ce document, est disponible sur mon github, à l’adresse ci-dessous : 
+
+\href{https://github.com/Abdoussalam/datamemoire/tree/memoireMMQEF-V1.0}{https://github.com/Abdoussalam/datamemoire/tree/memoireMMQEF-V1.0}
+
+
+%--------------------------------------------------------------------------------
+% Remerciements
+%--------------------------------------------------------------------------------
 
 \chapter*{Remerciements}
 La réalisation de ce mémoire n’aurait pas été possible sans l’apport et le soutien inestimable des plusieurs personnes et institution à l’endroit desquelles, je voudrais exprimer toute ma gratitude et ma reconnaissance. 
@@ -157,7 +176,9 @@ Je tiens aussi à exprimer toute ma gratitude à l’Institut National de la Sta
 
 Enfin, il m’est difficile de trouver des mots pour remercier mes camarades de la 4ème promotion du Master MMQEF, pour l’esprit de solidarité et d’entraider qui a prévalu tout au long de ce cycle. 
 
-
+%--------------------------------------------------------------------------------
+% Sommaire, liste des tableaux et graphiques
+%--------------------------------------------------------------------------------
 \addcontentsline{toc}{chapter}{\protect\numberline{}Remerciements}
 \shorttoc{Sommaire}{1}
 \listoftables
@@ -167,6 +188,9 @@ Enfin, il m’est difficile de trouver des mots pour remercier mes camarades de 
 \printnoidxglossary[type=acronym, title={Liste des Sigles et Abréviations}]
 \addcontentsline{toc}{chapter}{\protect\numberline{}Liste des Sigles et Abréviations}
 
+%--------------------------------------------------------------------------------
+%Resumé
+%--------------------------------------------------------------------------------
 \begin{abstract}
 \addcontentsline{toc}{chapter}{\numberline{}Résumé}
 Ce mémoire traite de l'impact de la vulgarisation agricole sur l'efficacité technique des producteurs de mil au Niger, en utilisant un modèle de frontière stochastique de production non neutre. Ce modèle est appliqué sur les données issues de l'\gls{ECVMA}, réalisée par l'\gls{INS} en 2014. 

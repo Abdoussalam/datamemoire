@@ -1,0 +1,287 @@
+\documentclass[a4paper,12pt]{report}
+\usepackage[a4paper,left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{natbib}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{times}
+\usepackage{chngcntr}
+\counterwithout{footnote}{chapter}
+\usepackage{delarray}
+\usepackage{latexsym}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[cyr]{aeguill}
+\usepackage{here}
+\usepackage{appendix}
+\usepackage[acronym]{glossaries}
+\renewcommand{\appendixpagename}{Annexes}
+\usepackage{listings}
+\usepackage{inconsolata}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{libertine}
+\usepackage{fancyhdr}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{longtable}
+\usepackage{shorttoc}
+\captionsetup{figurewithin=none}  
+\captionsetup{tablewithin=none}
+\usepackage{lastpage}
+\usepackage{pict2e}
+\usepackage{tikz} 
+\usepackage{booktabs}
+\usepackage{fncychap}
+\usepackage[fixlanguage]{babelbib}
+\selectlanguage{french}
+\frenchbsetup{StandardItemLabels = true, CompactItemize = talse, ReduceListSpacing = true}
+\let\oldtabular=\tabular
+\def\tabular{\footnotesize\oldtabular}
+\renewcommand{\arraystretch}{1.2}
+%options entétes et pieds de page%
+\pagestyle{fancy}
+\renewcommand\headrulewidth{.5pt}
+\fancyhead[L]{\small Mémoire Master 2 MMQEF}
+\fancyhead[R]{\small 2019}
+\renewcommand\footrulewidth{.5pt}
+\fancyfoot[C]{\small Page \thepage ~sur ~\pageref{LastPage}}
+\parskip=5pt
+%numérotation des équations par section
+\makeatletter
+\renewcommand{\theequation}{\thesection .\arabic{equation}}
+\@addtoreset{equation}{section}
+\makeatother
+
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+\newcommand{\hsp}{\hspace{20pt}}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+%====================================================================================================================
+%Sigles et abréviations
+%====================================================================================================================
+\makenoidxglossaries
+\newacronym{PIB}{PIB}{Produit Intérieur Brut}
+\newacronym{INS}{INS}{Institut National de la Statistique}
+\newacronym{RGPH}{RGPH}{Recensement Général de la Population et de l'Habitat}
+\newacronym{FAO}{FAO}{Organisation des Nations Unies pour l'Alimentation et l'Agriculture}
+\newacronym{ECVMA}{ECVMA}{Enquête sur les Conditions de Vie des Ménages et l'Agriculture}
+\newacronym{SAN}{SAN/DA/D} {Stratégie Nationale pour la Sécurité Alimentaire et Nutritionnelle et le Développement Agricole}
+\newacronym{SDR}{SDR} {Stratégie de Développement Rural}
+\newacronym{SNCA}{SNCA} {Système National de Conseil Agricole}
+\newacronym{ISA}{LSMS-ISA}{Étude sur la Mesure des Niveaux de Vie}
+\newacronym{DEA}{DEA}{Analyse par Enveloppement des Données}
+\newacronym{MMQEF}{MMQEF}{Master en Modélisation et Méthodes Quantitatives en Economie et en Finance}
+\newacronym{UCAD}{UCAD}{Université Cheikh Anta DIOP}
+\newacronym{ha}{ha}{Hectare}
+\newacronym{USA}{USA}{Etats-Unis}
+\begin{document}
+%====================================================================================================================
+% PAGE DE GARDE
+%====================================================================================================================
+\begin{titlepage}
+  \begin{sffamily}
+  \begin{center}
+
+    % Upper part of the page. The '~' is needed because \\
+    % only works if a paragraph has started.
+    
+ \textbf{\bfseries UNIVERSITÉ CHEIKH ANTA DIOP (UCAD)}\\[1cm]
+   
+   \includegraphics[height=0.1\textheight]{ucad.jpg}\\[1cm]
+   
+   \textbf{\large \bfseries Faculté des Sciences Economiques et Gestion (FASEG)\\
+     Master en Modélisation et Méthodes Quantitatives en Économie et en Finance (MMQEF)
+   }\\[1cm]
+    
+    \textbf{Option: Économie Quantitative}\\[0.5cm]
+    
+    \textsc{\textbf{MÉMOIRE DE FIN D’ÉTUDES}}\\[1cm]
+    
+    \textsc{\textbf{THEME}}\\[0.5cm]
+
+    % Title
+    \HRule \\[0.4cm]
+    { \LARGE \bfseries Évaluation de l'impact de la vulgarisation agricole sur l'efficacité technique des producteurs de mil au Niger\\}
+
+    \HRule \\[1cm]
+   
+\textbf{Préparé et soutenu par}: Abdoussalam \small ZAKARI\\ [1cm]
+
+\textbf{Sous la Direction de}: Ph.D Mahamadou \small TANKARI \\[1cm]
+
+\end{center}
+\textbf{Membres du Jury :}
+       \vfill
+
+    % Bottom of the page
+        
+    \center \emph{\textbf{\copyright décembre 2019}}
+
+  
+  \end{sffamily}
+\end{titlepage}
+
+%====================================================================================================================
+% TABLES DES MARTIERES, LISTE DES GRAPHIQUES ET FIGURES, LISTES DES SIGLES ET ABREVIATIONS
+%====================================================================================================================
+\begin{onehalfspace}
+\pagenumbering{roman}
+
+%--------------------------------------------------------------------------------
+% DEDICACES
+%--------------------------------------------------------------------------------
+\chapter*{Dédicaces}
+\addcontentsline{toc}{chapter}{\numberline{}Dédicaces}
+\vspace*{\stretch{1}}
+\begin{flushright}
+
+	A mes parents, Zakari et Nayé\\
+	A ma femme, Saadatou\\
+	A mes enfants, Ihsan et Amira...
+\end{flushright}
+\vspace*{\stretch{2}}
+
+\chapter*{Remerciements}
+La réalisation de ce mémoire n’aurait pas été possible sans l’apport et le soutien inestimable des plusieurs personnes et institution à l’endroit desquelles, je voudrais exprimer toute ma gratitude et ma reconnaissance. 
+
+Je tiens d’abord à remercier mon encadreur, le Ph.D Mahamadou Tankari, pour ses précieux conseils et suggestions, ainsi que la riche documentation qu’il a mise à ma disposition. 
+
+Je souhaite également exprimer ma profonde reconnaissance à l’ensemble du corps enseignant et administratif du \gls{MMQEF} de l’\gls{UCAD}, pour leurs différentes contributions à ma formation ou à l’amélioration de mes conditions de travail.  Je pense, en particulier, au Pr. Diaraf SECK et au Ph.D Ibrahima DIALLO qui m’ont fait découvrir, pour la première fois, la notion d’efficience ou efficacité technique. 
+
+Je tiens aussi à exprimer toute ma gratitude à l’Institut National de la Statistique (INS), notamment à son Directeur Général, Monsieur Idrissa ALICHINA KOURGUENI, pour m’avoir accordé le financement nécessaire afin de suivre cette formation.
+
+Enfin, il m’est difficile de trouver des mots pour remercier mes camarades de la 4ème promotion du Master MMQEF, pour l’esprit de solidarité et d’entraider qui a prévalu tout au long de ce cycle. 
+
+
+\addcontentsline{toc}{chapter}{\protect\numberline{}Remerciements}
+\shorttoc{Sommaire}{1}
+\listoftables
+\addcontentsline{toc}{chapter}{\protect\numberline{}Liste des tableaux}
+\listoffigures
+\addcontentsline{toc}{chapter}{\protect\numberline{}Liste des graphiques}
+\printnoidxglossary[type=acronym, title={Liste des Sigles et Abréviations}]
+\addcontentsline{toc}{chapter}{\protect\numberline{}Liste des Sigles et Abréviations}
+
+\begin{abstract}
+\addcontentsline{toc}{chapter}{\numberline{}Résumé}
+Ce mémoire traite de l'impact de la vulgarisation agricole sur l'efficacité technique des producteurs de mil au Niger, en utilisant un modèle de frontière stochastique de production non neutre. Ce modèle est appliqué sur les données issues de l'\gls{ECVMA}, réalisée par l'\gls{INS} en 2014. 
+
+Les résultats obtenus montrent que les rendements d'échelle de la production de mil au Niger sont décroissants. Lorsque les quantités de tous les inputs sont simultanément multipliées par 2, la production augmenterait, en moyenne, de 78.5 \%. La production est plus sensible à la quantité de main d'oeuvre utilisée. Son élasticité par rapport à ce facteur est de 0.328, tandis qu'elle est de 0.18 par rapport à la superficie cultivée. De plus, la production de mil connaitrait une hausse de 9.6\% lorsque les producteurs reçoivent deux fois plus de visites des agents de la vulgarisation agricole publique. Cette hausse serait de 13\% lorsque les visites sont effectuées par des agents relevant du secteur privé.  
+
+Par ailleurs, la vulgarisation agricole améliore la productivité marginale de l'utilisation d'engrais organique et de la main d'oeuvre. De plus, les deux types de vulgarisation (publique et privée) sont complémentaires par rapport à la frontière de production. Ce résultat indique que l'accès à la vulgarisation publique et privée a un effet positif sur la production de mil. 
+
+Les résultats montrent également que les producteurs de mil sont techniquement efficaces à 62\%. La majorité des producteurs ont un niveau d'efficience compris entre 0.6 à 0.8. Ce qui signifie que la production de mil au Niger pourrait considérablement augmenter, sans l'utilisation de ressources productives additionnelles. 
+
+La vulgarisation agricole améliore l'efficacité technique des producteurs. Ceux qui en bénéficient sont techniquement efficaces à 70\%. Les producteurs conseillés par les agents des services publics de la vulgarisation agricole ont un score d'efficience de 0.71, contre 0.69 pour les agriculteurs bénéficiant de l'appui des structures privées. Le niveau d'efficacité technique des producteurs augmenterait de 6.88\% lorsque le nombre de visites des services publics de la vulgarisation agricole double, contre 3.39\% dans le cas de la vulgarisation privée. 
+
+Les autres déterminants de l'efficacité technique des producteurs de mil sont la taille du ménage (effet négatif), la superficie cultivée (effet négatif), la main d'oeuvre employée (effet positif) et la culture en association (effet positif). 
+
+\textbf{Mots-clés}: Efficacité technique, vulgarisation agricole, frontière stochastique de production
+
+\end{abstract}
+
+%===================================================================================================================
+\chapter{Introduction Générale}
+%===================================================================================================================
+%\addcontentsline{toc}{chapter}{\protect\numberline{}Introduction Générale}
+%-------------------------------------------------------------------------------------------------------------------
+\pagenumbering{arabic}
+\section{Contexte}
+%-------------------------------------------------------------------------------------------------------------------
+
+
+
+
+Au Niger, à l'instar de la plupart des pays en développement, le secteur agricole reste le principal moteur de l’économie. Selon l'\gls{INS}, la contribution de l’agriculture dans la formation du \gls{PIB} était estimée à 43.4\% \footnote{Il s’agit de l’Agriculture au sens large du terme, tenant compte de toutes les activités agro-sylvo-pastorales} en 2017. En outre, les résultats du \gls{RGPH}, réalisé en 2012, ont montré que 76\% de la population active est employée par le secteur agricole qui constitue de ce fait, le premier pourvoyeur d’emplois du pays \citep{RGPH2012}.
+
+L’agriculture au Niger est fortement dépendante de la pluviométrie qui reste malheureusement faible et caractérisée par une grande variabilité dans le temps et l’espace. En effet, les zones agricoles, représentant 13\% du territoire national, reçoivent entre 350 et 800 mm de pluie par an. Ces conditions climatiques de type sahélien exposent le Niger à des épisodes récurrents de sécheresses (sept y ont été enregistrées entre 1980 et 2010) affectant gravement la production agricole \citep{mondiale2013evaluation}. Par ailleurs, les 3/4 de la superficie du pays sont occupées par le désert du Sahara dont l’avancée menace les terres cultivables.
+
+Par ailleurs, la situation sociodémographique est caractérisée par une forte croissance de la population qui augmente à un taux de 3.9\% par an. Ce taux est largement au-dessus de la croissance moyenne de la population en Afrique subsaharienne, estimée à 2.7\% \citep{unies2019perspectives}. Ce dynamisme de la population Nigérienne engendre une hausse importante des besoins alimentaires qui exerce une forte pression sur les terres agricoles et accélère leur appauvrissement \citep{mondiale2013evaluation}.
+
+La production agricole est dominée par les cultures céréalières vivrières et en particulier, celle du mil qui constitue l'alimentation de base de la population. Au cours de la campagne hivernale 2017-2018, la production de cette spéculation a été évaluée à 3790028 tonnes \citep{mil2017}, soit plus de 64\% de la production céréalière du nationale. Ce Niveau de production fait du Niger le deuxième producteur du mil au monde, après l'Inde \citep{faostat}.
+
+La culture du mil a connu une forte progression depuis les indépendances, comme le montre la figure \ref{figure.intro1}. 
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning in file(file, "{}rt"{}): impossible d'ouvrir le fichier 'base\_fao.csv' : No such file or directory}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in file(file, "{}rt"{}): impossible d'ouvrir la connexion}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in data.table(base\_fao): objet 'base\_fao' introuvable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): objet 'base\_fao' introuvable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): objet 'base\_fao' introuvable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): objet 'base\_niger' introuvable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): objet 'tprod' introuvable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): objet 'base\_niger' introuvable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): objet 'tsup' introuvable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in mean(rendement[Pays == "{}Niger"{}]\$Valeur/10): objet 'rendement' introuvable}}\end{kframe}
+\end{knitrout}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
