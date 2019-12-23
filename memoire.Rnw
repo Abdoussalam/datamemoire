@@ -154,11 +154,19 @@
 
 Ce mémoire a été réalisé dans le cadre du Master en Modélisation et Méthodes Quantitatives en Economie et en Finance, organisé par la Faculté des Sciences Economiques et de Gestion de l’Université Cheikh Anta DIOP, en partenariat avec l’Ecole Nationale de la Statistique et d’Analyse Economique (ENSAE) de Dakar. Il a été rédigé à l’Institut National de la Statistique (INS) du Niger, qui constitue la principale source des données utilisées. 
 
+<<<<<<< HEAD
 Le présent rapport a été entièrement élaboré sur l’application Rstudio, qui est un environnement de développement libre et gratuit pour le langage R. Il respecte les principes de la recherche reproductible, afin de permettre à toute personne qui le désire, d'inspecter le code de programmation utilisé pour le traitement et l’analyse des données et de vérifier les résultats auxquels nous sommes parvenus. 
 
 Ainsi, le programme R, ayant servi à produire les différents tableaux et graphiques contenus dans ce document, est disponible sur mon github, à l’adresse ci-dessous : 
 
 \href{https://github.com/Abdoussalam/datamemoire/tree/memoireMMQEF-V1.1}{https://github.com/Abdoussalam/datamemoire/tree/memoireMMQEF-V1.1}
+=======
+Le présent rapport a été entièrement élaboré sur l’application Rstudio qui un environnement de développement libre et gratuit pour le langage R. Il respecte les principes de la recherche reproductible, afin de permettre à toute personne qui le désire, d'inspecter le code de programmation utilisé pour le traitement et l’analyse des données et de vérifier les résultats auxquels nous sommes parvenus. 
+
+Ainsi, le programme R, ayant servi à obtenir les différents résultats contenus de ce document, est disponible sur mon github, à l’adresse ci-dessous : 
+
+\href{https://github.com/Abdoussalam/datamemoire/tree/memoireMMQEF-V1.0}{https://github.com/Abdoussalam/datamemoire/tree/memoireMMQEF-V1.0}
+>>>>>>> add61f45264f2ceea04a2126b7beeec104650243
 
 
 %--------------------------------------------------------------------------------
