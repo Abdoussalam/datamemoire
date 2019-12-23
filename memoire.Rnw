@@ -94,7 +94,7 @@
    
    \includegraphics[height=0.1\textheight]{ucad.jpg}\\[1cm]
    
-   \textbf{\large \bfseries Faculté des Sciences Economiques et Gestion (FASEG)\\
+   \textbf{\large \bfseries Faculté des Sciences Economiques et de Gestion (FASEG)\\
      Master en Modélisation et Méthodes Quantitatives en Économie et en Finance (MMQEF)
    }\\[1cm]
     
@@ -132,9 +132,9 @@
 \begin{onehalfspace}
 \pagenumbering{roman}
 
-%--------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------------------
 % DEDICACES
-%--------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------------------
 \chapter*{Dédicaces}
 \addcontentsline{toc}{chapter}{\numberline{}Dédicaces}
 \vspace*{\stretch{1}}
@@ -145,6 +145,25 @@
 	A mes enfants, Ihsan et Amira...
 \end{flushright}
 \vspace*{\stretch{2}}
+
+%-------------------------------------------------------------------------------------------------------------
+% Avant propos
+%--------------------------------------------------------------------------------
+\chapter*{Avant-propos}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Avant-propos}
+
+Ce mémoire a été réalisé dans le cadre du Master en Modélisation et Méthodes Quantitatives en Economie et en Finance, organisé par la Faculté des Sciences Economiques et de Gestion de l’Université Cheikh Anta DIOP, en partenariat avec l’Ecole Nationale de la Statistique et d’Analyse Economique (ENSAE) de Dakar. Il a été rédigé à l’Institut National de la Statistique (INS) du Niger, qui constitue la principale source des données utilisées. 
+
+Le présent rapport a été entièrement élaboré sur l’application Rstudio, qui est un environnement de développement libre et gratuit pour le langage R. Il respecte les principes de la recherche reproductible, afin de permettre à toute personne qui le désire, d'inspecter le code de programmation utilisé pour le traitement et l’analyse des données et de vérifier les résultats auxquels nous sommes parvenus. 
+
+Ainsi, le programme R, ayant servi à produire les différents tableaux et graphiques contenus dans ce document, est disponible sur mon github, à l’adresse ci-dessous : 
+
+\href{https://github.com/Abdoussalam/datamemoire/tree/memoireMMQEF-V1.1}{https://github.com/Abdoussalam/datamemoire/tree/memoireMMQEF-V1.1}
+
+
+%--------------------------------------------------------------------------------
+% Remerciements
+%--------------------------------------------------------------------------------
 
 \chapter*{Remerciements}
 La réalisation de ce mémoire n’aurait pas été possible sans l’apport et le soutien inestimable des plusieurs personnes et institution à l’endroit desquelles, je voudrais exprimer toute ma gratitude et ma reconnaissance. 
@@ -157,7 +176,9 @@ Je tiens aussi à exprimer toute ma gratitude à l’Institut National de la Sta
 
 Enfin, il m’est difficile de trouver des mots pour remercier mes camarades de la 4ème promotion du Master MMQEF, pour l’esprit de solidarité et d’entraider qui a prévalu tout au long de ce cycle. 
 
-
+%--------------------------------------------------------------------------------
+% Sommaire, liste des tableaux et graphiques
+%--------------------------------------------------------------------------------
 \addcontentsline{toc}{chapter}{\protect\numberline{}Remerciements}
 \shorttoc{Sommaire}{1}
 \listoftables
@@ -167,6 +188,9 @@ Enfin, il m’est difficile de trouver des mots pour remercier mes camarades de 
 \printnoidxglossary[type=acronym, title={Liste des Sigles et Abréviations}]
 \addcontentsline{toc}{chapter}{\protect\numberline{}Liste des Sigles et Abréviations}
 
+%--------------------------------------------------------------------------------
+%Resumé
+%--------------------------------------------------------------------------------
 \begin{abstract}
 \addcontentsline{toc}{chapter}{\numberline{}Résumé}
 Ce mémoire traite de l'impact de la vulgarisation agricole sur l'efficacité technique des producteurs de mil au Niger, en utilisant un modèle de frontière stochastique de production non neutre. Ce modèle est appliqué sur les données issues de l'\gls{ECVMA}, réalisée par l'\gls{INS} en 2014. 
@@ -175,7 +199,7 @@ Les résultats obtenus montrent que les rendements d'échelle de la production d
 
 Par ailleurs, la vulgarisation agricole améliore la productivité marginale de l'utilisation d'engrais organique et de la main d'oeuvre. De plus, les deux types de vulgarisation (publique et privée) sont complémentaires par rapport à la frontière de production. Ce résultat indique que l'accès à la vulgarisation publique et privée a un effet positif sur la production de mil. 
 
-Les résultats montrent également que les producteurs de mil sont techniquement efficaces à 62\%. La majorité des producteurs ont un niveau d'efficience compris entre 0.6 à 0.8. Ce qui signifie que la production de mil au Niger pourrait considérablement augmenter, sans l'utilisation de ressources productives additionnelles. 
+Les résultats montrent également que les producteurs de mil sont techniquement efficaces à 62\%. La majorité des producteurs ont un niveau d'efficience compris entre 0.6 à 0.8. Ce qui signifie que la production de mil au Niger pourrait considérablement augmenter, sans utilisation de ressources productives additionnelles. 
 
 La vulgarisation agricole améliore l'efficacité technique des producteurs. Ceux qui en bénéficient sont techniquement efficaces à 70\%. Les producteurs conseillés par les agents des services publics de la vulgarisation agricole ont un score d'efficience de 0.71, contre 0.69 pour les agriculteurs bénéficiant de l'appui des structures privées. Le niveau d'efficacité technique des producteurs augmenterait de 6.88\% lorsque le nombre de visites des services publics de la vulgarisation agricole double, contre 3.39\% dans le cas de la vulgarisation privée. 
 
@@ -201,7 +225,6 @@ require(data.table)
 require(ggplot2)
 require(ggthemes)
 require(survey)
-require(data.table)
 require(frontier)
 require(lmtest)
 require(car)
@@ -220,9 +243,7 @@ L’agriculture au Niger est fortement dépendante de la pluviométrie qui reste
 
 Par ailleurs, la situation sociodémographique est caractérisée par une forte croissance de la population qui augmente à un taux de 3.9\% par an. Ce taux est largement au-dessus de la croissance moyenne de la population en Afrique subsaharienne, estimée à 2.7\% \citep{unies2019perspectives}. Ce dynamisme de la population Nigérienne engendre une hausse importante des besoins alimentaires qui exerce une forte pression sur les terres agricoles et accélère leur appauvrissement \citep{mondiale2013evaluation}.
 
-La production agricole est dominée par les cultures céréalières vivrières et en particulier, celle du mil qui constitue l'alimentation de base de la population. Au cours de la campagne hivernale 2017-2018, la production de cette spéculation a été évaluée à 3790028 tonnes \citep{mil2017}, soit plus de 64\% de la production céréalière du nationale. Ce Niveau de production fait du Niger le deuxième producteur du mil au monde, après l'Inde \citep{faostat}.
-
-La culture du mil a connu une forte progression depuis les indépendances, comme le montre la figure \ref{figure.intro1}. 
+La production agricole est dominée par les cultures céréalières vivrières et en particulier, celle du mil qui constitue l'alimentation de base de la population. Au cours de la campagne hivernale 2017-2018, la production de cette spéculation a été évaluée à 3790028 tonnes \citep{mil2017}, soit plus de 64\% de la production céréalière nationale. Ce Niveau de production fait du Niger le deuxième producteur du mil au monde, après l'Inde \citep{faostat}.
 
 <<taux, echo = F>>=
 #Importation des données provenant du site de la fao
@@ -243,7 +264,7 @@ tsup.an = (tsup^(1/length(1961:2017)) -1) * 100
 rendement.moy = mean(rendement[Pays == "Niger"]$Valeur/10)
 @
 
-De 1961 à 2017, la production du mil a augmenté en moyenne de \Sexpr{round(tprod.an,1)}\% par an\footnote{Source: Calcul de l'auteur à partir de données de FAOSTAT}. Au même moment, les superficies cultivées ont connu une hausse comparable (\Sexpr{round(tsup.an,1)}\%). Toutefois, entre 1990 et 2017, l’augmentation des superficies a été plus soutenue que celle de la production.
+La culture du mil au Niger a connu une forte progression depuis les indépendances, comme le montre la figure \ref{figure.intro1}. De 1961 à 2017, cette production a augmenté en moyenne de \Sexpr{round(tprod.an,1)}\% par an\footnote{Source: Calcul de l'auteur à partir de données de FAOSTAT}. Au même moment, les superficies cultivées ont connu une hausse comparable (\Sexpr{round(tsup.an,1)}\%). Toutefois, entre 1990 et 2017, l’augmentation des superficies a été plus soutenue que celle de la production.
 
 %Graphique 1
 \begin{figure}[H]
@@ -262,7 +283,7 @@ Niger
 \end{center}
 \end{figure}
 
-La hausse de la production repose essentiellement sur l'accroissement des superficies cultivées. En effet, sur la figure \ref{figure.intro2}, il ressort que les rendements du mil au Niger n’ont pas connu une amélioration significative depuis 1961. Ils fluctuent autour de \Sexpr{round(rendement.moy,0)} kg/ha et restent inférieurs aux rendements moyens enregistrés dans d’autres pays sahéliens producteurs de mil, comme le Burkina-Faso (\Sexpr{round(mean(base_fao[Element == "Rendement" & Pays == "Burkina Faso"]$Valeur/10))} kg/ha) ou le Sénégal (\Sexpr{round(mean(base_fao[Element == "Rendement" & Pays == "Sénégal"]$Valeur/10))} kg/ha). Pourtant, entre 1961 et 1980, les rendements du mil du Niger étaient proches de ceux de ces deux pays. Ils étaient en moyenne de \Sexpr{round(mean(base_fao[Element == "Rendement" & Pays == "Niger" & Annee < 1981]$Valeur/10))}, \Sexpr{round(mean(base_fao[Element == "Rendement" & Pays == "Sénégal" & Annee < 1981]$Valeur/10))} et \Sexpr{round(mean(base_fao[Element == "Rendement" & Pays == "Burkina Faso" & Annee < 1981]$Valeur/10))} kg/ha, respectivement pour le Niger, le Sénégal et le Burkina-Faso. Mais à partir des années 80, les performances de la production du mil se sont globalement améliorées au Burkina-Faso comme au Sénégal et pas au Niger.
+La hausse de la production repose essentiellement sur l'accroissement des superficies cultivées. En effet, sur la figure \ref{figure.intro2}, il ressort que les rendements du mil au Niger n’ont pas connu une amélioration significative depuis 1961. Ils fluctuent autour de \Sexpr{round(rendement.moy,0)} kg/ha et restent inférieurs aux rendements moyens enregistrés dans d’autres pays sahéliens producteurs de mil, comme le Burkina-Faso (\Sexpr{round(mean(base_fao[Element == "Rendement" & Pays == "Burkina Faso"]$Valeur/10))} kg/ha) ou le Sénégal (\Sexpr{round(mean(base_fao[Element == "Rendement" & Pays == "Sénégal"]$Valeur/10))} kg/ha). Pourtant, entre 1961 et 1980, les rendements du mil du Niger étaient proches de ceux de ces deux pays. Ils étaient en moyenne de \Sexpr{round(mean(base_fao[Element == "Rendement" & Pays == "Niger" & Annee < 1981]$Valeur/10))}, \Sexpr{round(mean(base_fao[Element == "Rendement" & Pays == "Sénégal" & Annee < 1981]$Valeur/10))} et \Sexpr{round(mean(base_fao[Element == "Rendement" & Pays == "Burkina Faso" & Annee < 1981]$Valeur/10))} kg/ha, respectivement au le Niger, le Sénégal et le Burkina-Faso. Mais à partir des années 80, les performances de la production du mil se sont globalement améliorées au Burkina-Faso comme au Sénégal et pas au Niger.
 
 %Graphique 2
 \begin{figure}
@@ -290,7 +311,7 @@ L'évaluation de la mise en oeuvre de la \gls{SAN} de 2011 à 2015 a fait ressor
   \section{Problématique et motivation de l’étude}
 %------------------------------------------------------------------------------------------------------------------- 
 
-La tendance haussière de la production du mil au Niger, observée depuis les années 60 est principalement portée par l'augmentation des dotations factorielles. Cette croissance extensive, n'est pas soutenable à long terme car les facteurs de production, notamment les superficies cultivées, sont limités et soumis à des contraintes climatiques et démographiques. Pour garantir une hausse durable de la production du mil, il est nécessaire d'améliorer sa productivité et un moyen d'y arriver est d'améliorer l'efficacité technique des producteurs. En effet, l'efficacité technique renvoie au respect du principe de non gaspillage dans l'utilisation des ressources productives. 
+La tendance haussière de la production de mil au Niger, observée depuis les années 60, est principalement liée à l'augmentation des dotations factorielles. Cette croissance extensive, n'est pas soutenable à long terme car les facteurs de production, notamment les superficies cultivées, sont limités et soumis à des contraintes climatiques et démographiques. Pour garantir une hausse durable de cette production, il est nécessaire de relever sa productivité et un moyen d'y parvenir est d'améliorer l'efficacité technique des producteurs. En effet, l'efficacité technique ou efficience renvoie à une utilisation optimale des quantités des inputs, permettant d'éviter le gaspillage dans le processus de production. 
 
 L'un des facteurs susceptibles d'affecter positivement le niveau d'efficacité technique des agriculteurs est leur accès à des services de vulgarisation agricole de qualité. La vulgarisation agricole est un mécanisme par lequel l'information sur les nouvelles technologies, des options de gestion plus efficaces et de meilleures pratiques agricoles peuvent être transmises aux agriculteurs \citep{owens2003impact}. Elle est synonyme de services de conseil agricole, d'après l'\gls{FAO} et doit faciliter l'interaction entre les agriculteurs d'une part et les centres de recherches agronomiques d'autre part, pour une meilleure prise en compte des besoins des producteurs et pour le développement et l'adoption de technologies innovantes.
 
@@ -2238,7 +2259,7 @@ options("encoding" = "UTF-8")
 %Conclusion
 %====================================================================================================================
 \chapter*{Conclusion}
-Cette étude avait pour objectif d'analyser l'impact de la vulgarisation agricole sur l'efficacité technique des producteurs de mil au Niger. Pour ce faire, un modèle de frontière stochastique de production non neutre a été appliqué sur les données de l'\gls{ECVMA} 2014. Ce modèle a été validé en vérifiant l'existence d'inefficience dans le processus de production du mil, la significativité globale des coefficients associés aux différents paramètres estimés et par l'étude de la consistance théorique de la frontière de production. 
+Cette étude avait pour objectif d'évaluer l'impact de la vulgarisation agricole sur l'efficacité technique des producteurs de mil au Niger. Pour ce faire, un modèle de frontière stochastique de production non neutre a été appliqué sur les données de l'\gls{ECVMA} 2014. Ce modèle a été validé en vérifiant l'existence d'inefficience dans le processus de production du mil, la significativité globale des coefficients associés aux différents paramètres estimés et par l'étude de la consistance théorique de la frontière de production. 
 
 Les résultats obtenus font ressortir que le processus de production du mil est caractérisé par des rendements d'échelle décroissants. Lorsque les quantités de tous les facteurs de production sont simultanément multipliées par 2, la production augmenterait de \Sexpr{round(mean(rendement)*100, 1)} \%. 
 
@@ -2247,9 +2268,9 @@ Par ailleurs, les producteurs de mil sont techniques efficaces à \Sexpr{round(m
 
 En outre, le nombre de visites des services de vulgarisation agricole a un effet positif sur le niveau d'efficience des producteurs. Lorsque les visites des services publics de vulgarisation agricole doublent, les scores d'efficience des producteurs qui en bénéficient, augmenterait de \Sexpr{round(mean(base[vulga.etat != 0]$e.e.etat)*100,2)}\%. Cette hausse serait de  \Sexpr{round(100 * mean(base[vulga.prive != 0]$e.e.autre), 2)}\% dans le cas de la vulgarisation privée. 
 
-L'impact global de la vulgarisation sur la production a été également évalué. Ainsi, un déboublement des visites des services publics d'encadrement agricole aux producteurs permettrait d'enregistrer une hausse de la production de \Sexpr{round(mean(e.frontier[base$vulga.etat != 0,6])*100, 1)}\%. Lorsque les visites des structures privées de vulgarisation agricole doublent, la production augmenterait de  \Sexpr{round(mean(e.frontier[base$vulga.prive != 0, 7])*100, 1)}\%.
+L'impact global de la vulgarisation sur la production a été également évalué. Ainsi, un déboublement des visites des services publics d'encadrement agricole des producteurs permettrait d'enregistrer une hausse de la production de \Sexpr{round(mean(e.frontier[base$vulga.etat != 0,6])*100, 1)}\%. Lorsque les visites des structures privées de vulgarisation agricole doublent, la production augmenterait de  \Sexpr{round(mean(e.frontier[base$vulga.prive != 0, 7])*100, 1)}\%.
 
-Au vu de ce qui procède, nous proposons un renforcement de la coordination et une intensification des actions des différents acteurs du \gls{SNCA}, afin de rehausser le faible taux d'accès à la vulgarisation agricole par les producteurs, qui est d'environ  \Sexpr{round(100 * effsource[5,2] / effsource[6,2], 2)} \%. La coordination du SNCA permettra de mieux couvrir les besoins en matière d'appui-conseil aux producteurs. Elle permettra également d'améliorer la qualité de l'encadrement technique en identifiant les domaines dans lesquels la vulgarisation agricole est moins performante. A ce sujet, cette étude a montré que la vulgarisation agricole n'a pas d'effet sur la productivité marginale de certains facteurs de production, notamment la superficie cultivée et les semences. Nous suggérons ainsi une amélioration des actions de formation et de sensibilisation des producteurs sur la gestion des terres et sur l'utilisation des semences. 
+Au vu de ces résultats, nous proposons un renforcement de la coordination et une intensification des actions des différents acteurs du \gls{SNCA}, afin de rehausser le faible taux d'accès à la vulgarisation agricole par les producteurs, qui est d'environ  \Sexpr{round(100 * effsource[5,2] / effsource[6,2], 2)} \%. La coordination du SNCA permettra de mieux couvrir les besoins en matière d'appui-conseil aux producteurs. Elle permettra également d'améliorer la qualité de l'encadrement technique en identifiant et en focalisant les efforts dans les domaines où la vulgarisation agricole est moins performante. A ce sujet, cette étude a montré que la vulgarisation agricole n'a pas d'effet sur la productivité marginale de certains facteurs de production, notamment la superficie cultivée et les semences. Nous suggérons ainsi une amélioration des actions de formation et de sensibilisation des producteurs sur la gestion des terres et sur l'utilisation des semences. 
 
 La prise en compte de la nature des interventions (type de formations, thématiques de sensibilisation) des acteurs engagés dans la vulgarisation agricole aurait pu permettre de déterminer les actions qui impactent sur le niveau d'efficience des producteurs de mil. D'autre part, la production de mil au Niger se faisant généralement en association avec d'autres spéculations (sorgho, niébé, arachide...), un modèle permettant de traiter plusieurs outputs (fonction distance) serait plus adapté dans la présente étude.
 
